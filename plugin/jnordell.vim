@@ -72,3 +72,6 @@ au InsertEnter * call InsertStatuslineColor(v:insertmode)
 au InsertLeave * hi statusline    guifg=#666666   guibg=#1b1b1b   gui=none  ctermfg=245 ctermbg=236
 
 au filetype cucumber setlocal mp=bundle\ exec\ cucumber\ -c\ -f\ pretty\ %
+
+set scrolloff=5
+
