@@ -39,6 +39,7 @@ set expandtab
 set softtabstop=2
 if has("autocmd")
   filetype plugin indent on
+  filetype plugin on
 endif
 
 " Shift-arrows to select
@@ -75,3 +76,5 @@ au filetype cucumber setlocal mp=bundle\ exec\ cucumber\ -c\ -f\ pretty\ %
 
 set scrolloff=5
 
+" Better keybinding for NERDCommenter toggle
+vmap <silent> / :call NERDComment('nx', 'Toggle')<CR>
