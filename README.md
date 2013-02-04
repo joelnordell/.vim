@@ -3,7 +3,8 @@
 
 My VIM dir, using github to keep in sync across machines
 
-== Command-T Plugin ==
+
+### Command-T Plugin
 
 The Command-T plugin requires a native Ruby extension to be compiled before it will work.
 
