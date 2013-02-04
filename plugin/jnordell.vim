@@ -78,3 +78,20 @@ set scrolloff=5
 
 " Better keybinding for NERDCommenter toggle
 vmap <silent> / :call NERDComment('nx', 'Toggle')<CR>
+
+" Allow ESC to cancel autocomplete popup
+" (commented out for now, it's not working quite right)
+"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" Map Ctrl-K to Command-T popup
+nmap <C-k> "+:CommandT<CR>
+let g:CommandTCancelMap=['<C-c>', '<C-e>']
+
+" Set nowrap with fancy indicator characters
+set nowrap
+set listchars+=precedes:←,extends:→
+set sidescroll=20
+
+" Turn off annoying backup and swap files
+set nobackup
+set noswapfile
