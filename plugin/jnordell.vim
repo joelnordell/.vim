@@ -22,6 +22,9 @@ map <C-S> "+w
 map <C-Z> "+undo
 map <C-Y> "+redo
 
+" Q to quit
+map Q :qa<CR>
+
 " Set Left & Right to wrap around lines
 set ww+=<,>,[,]
 set ve=onemore
@@ -58,8 +61,8 @@ set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P
 set laststatus=2
 
 " Status line - changes colors depending on insert mode
-hi StatusLine     guifg=#666666   guibg=#1b1b1b   gui=none  ctermfg=245 ctermbg=236
-hi StatusLineNC   guifg=#444444   guibg=#1b1b1b   gui=none  ctermfg=239 ctermbg=235
+hi StatusLine     cterm=reverse guifg=#666666   guibg=#1b1b1b   gui=none  ctermfg=245 ctermbg=236
+hi StatusLineNC   cterm=none    guifg=#444444   guibg=#1b1b1b   gui=none  ctermfg=239 ctermbg=235
 function! InsertStatuslineColor(mode)
   if a:mode == 'i'
     hi statusline guifg=#DA4939   guibg=#1b1b1b   gui=none  ctermfg=167 ctermbg=236
@@ -91,6 +94,7 @@ let g:CommandTCancelMap=['<C-c>', '<C-e>']
 set nowrap
 set listchars+=precedes:←,extends:→
 set sidescroll=20
+hi NonText     guifg=#ffffff
 
 " Turn off annoying backup and swap files
 set nobackup
