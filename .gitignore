@@ -1,2 +1,7 @@
 .netrwhist
 sessions
+ruby/command-t/*.o
+ruby/command-t/*.so
+ruby/command-t/Makefile
+ruby/command-t/mkmf.log
+.VimballRecord
