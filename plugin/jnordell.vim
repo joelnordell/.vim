@@ -99,3 +99,7 @@ hi NonText     guifg=#ffffff
 " Turn off annoying backup and swap files
 set nobackup
 set noswapfile
+
+" Vertical line at 80 chars
+hi Colorcolumn guibg=#32322f ctermbg=236
+set colorcolumn=81
