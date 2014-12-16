@@ -92,7 +92,7 @@ let g:CommandTCancelMap=['<C-c>', '<C-e>']
 
 " Set nowrap with fancy indicator characters
 set nowrap
-set listchars+=precedes:←,extends:→
+"set listchars+=precedes:←,extends:→
 set sidescroll=20
 hi NonText     guifg=#ffffff
 
@@ -103,3 +103,6 @@ set noswapfile
 " Vertical line at 80 chars
 hi Colorcolumn guibg=#32322f ctermbg=236
 set colorcolumn=81
+
+" CSV plugin default delimiters, to eliminate warning
+let b:col='\%([^,]*,\|$\)'
