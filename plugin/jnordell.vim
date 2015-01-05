@@ -106,3 +106,8 @@ set colorcolumn=81
 
 " CSV plugin default delimiters, to eliminate warning
 let b:col='\%([^,]*,\|$\)'
+
+" Make tabs visible
+set list
+set listchars=tab:\→\ 
+highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
