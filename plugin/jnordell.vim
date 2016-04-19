@@ -112,4 +112,7 @@ set list
 set listchars=tab:\→\ 
 highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
 
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
+
 execute pathogen#infect()
