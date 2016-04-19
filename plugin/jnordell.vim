@@ -116,3 +116,6 @@ highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
 vnoremap . :normal .<CR>
 
 execute pathogen#infect()
+
+" allow JSX for .js files
+let g:jsx_ext_required = 0
