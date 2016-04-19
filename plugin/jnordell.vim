@@ -111,3 +111,5 @@ let b:col='\%([^,]*,\|$\)'
 set list
 set listchars=tab:\→\ 
 highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
+
+execute pathogen#infect()
