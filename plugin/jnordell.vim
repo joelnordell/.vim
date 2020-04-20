@@ -34,9 +34,7 @@ set ve=onemore
 :match ExtraWhitespace /\s\+$/
 
 " XCode-style auto-indentation
-map <Tab> "+=l
-" the following isn't quite working properly just yet
-" imap <Tab> <Esc>:norm mz<CR>=l:norm `z<CR>li
+map <Tab> ==
 set shiftwidth=2
 set expandtab
 set softtabstop=2
