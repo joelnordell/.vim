@@ -1,3 +1,10 @@
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+Plug 'maxmellon/vim-jsx-pretty'
+call plug#end()
+
 if ! has("gui_running")
   set t_Co=256
 endif
