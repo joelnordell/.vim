@@ -105,7 +105,8 @@ au filetype cucumber setlocal mp=bundle\ exec\ cucumber\ -c\ -f\ pretty\ %
 set scrolloff=5
 
 " Better keybinding for NERDCommenter toggle
-vmap <silent> / :call NERDComment('nx', 'Toggle')<CR>
+"vmap <silent> / :call NERDComment('nx', 'Toggle')<CR>
+vmap <silent> / gcc
 
 " Allow ESC to cancel autocomplete popup
 " (commented out for now, it's not working quite right)
