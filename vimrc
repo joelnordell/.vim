@@ -6,9 +6,13 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
+Plug 'Shougo/context_filetype.vim'
+Plug 'tyru/caw.vim'
+Plug 'posva/vim-vue'
 call plug#end()
 
 " YouCompleteMe configuration
