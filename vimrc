@@ -83,6 +83,7 @@ endif
 
 set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P
 set laststatus=2
+let g:ctags_statusline=1
 
 " Status line - changes colors depending on insert mode
 hi StatusLine     cterm=reverse guifg=#666666   guibg=#1b1b1b   gui=none  ctermfg=245 ctermbg=236
