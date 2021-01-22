@@ -11,28 +11,29 @@ augroup matchhtmlparen
 augroup END
 
 fu! s:Highlight_Matching_Pair()
-    " Remove any previous match.
-    if exists('w:tag_hl_on') && w:tag_hl_on
-        2match none
-        let w:tag_hl_on = 0
-    endif
+    "" Commented out because it wasn't working 2020-08-25 JDN
+    "" Remove any previous match.
+    "if exists('w:tag_hl_on') && w:tag_hl_on
+        "2match none
+        "let w:tag_hl_on = 0
+    "endif
 
-    " Avoid that we remove the popup menu.
-    " Return when there are no colors (looks like the cursor jumps).
-    if pumvisible() || (&t_Co < 8 && !has("gui_running"))
-        return
-    endif
+    "" Avoid that we remove the popup menu.
+    "" Return when there are no colors (looks like the cursor jumps).
+    "if pumvisible() || (&t_Co < 8 && !has("gui_running"))
+        "return
+    "endif
 
-    "get html tag under cursor
-    let tagname = s:GetCurrentCursorTag()
-    if tagname == ""|return|endif
+    ""get html tag under cursor
+    "let tagname = s:GetCurrentCursorTag()
+    "if tagname == ""|return|endif
 
-    if tagname[0] == '/'
-        let position = s:SearchForMatchingTag(tagname[1:], 0)
-    else
-        let position = s:SearchForMatchingTag(tagname, 1)
-    endif
-    call s:HighlightTagAtPosition(position)
+    "if tagname[0] == '/'
+        "let position = s:SearchForMatchingTag(tagname[1:], 0)
+    "else
+        "let position = s:SearchForMatchingTag(tagname, 1)
+    "endif
+    "call s:HighlightTagAtPosition(position)
 endfu
 
 fu! s:GetCurrentCursorTag()
