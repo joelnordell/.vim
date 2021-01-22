@@ -56,11 +56,6 @@ map Q :qa<CR>
 set ww+=<,>,[,]
 set ve=onemore
 
-" Highlight whitespace errors
-:highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
-:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
-:match ExtraWhitespace /\s\+$/
-
 " Map C-P to "goto newer" jumplist instead of C-I since we use Tab for indent
 nnoremap <C-P> <C-I>
 
@@ -189,3 +184,10 @@ inoremap <C-b> <esc>:TmuxNavigateDown<cr>
 inoremap <C-f> <esc>:TmuxNavigateUp<cr>
 inoremap <C-n> <esc>:TmuxNavigateRight<cr>
 noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+" Highlight whitespace errors
+highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
+hi! link ExtraWhitespace DiffRemoved
+match ExtraWhitespace /\s\+$/
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
+autocmd ColorScheme * hi! link ExtraWhitespace DiffRemoved
