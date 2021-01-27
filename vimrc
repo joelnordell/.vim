@@ -13,6 +13,7 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'Shougo/context_filetype.vim'
 Plug 'tyru/caw.vim'
 Plug 'posva/vim-vue'
+Plug 'fatih/vim-go'
 call plug#end()
 
 " YouCompleteMe configuration
