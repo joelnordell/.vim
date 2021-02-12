@@ -16,6 +16,15 @@ Plug 'posva/vim-vue'
 Plug 'fatih/vim-go'
 call plug#end()
 
+" Incremental search
+set incsearch
+" Use Tab/Shift-Tab to move between matches
+cmap <Tab> <C-g>
+cmap <S-Tab> <C-t>
+
+" map turning off highlighting after search and closing quickfix window
+nnoremap <Esc><Esc> :noh<CR>:ccl<CR>
+
 " YouCompleteMe configuration
 let g:ycm_clangd_binary_path = "/opt/clang/bin/clangd"
 let g:ycm_extra_conf_globlist = ['~/Projects/ErisExchangePricingEngine/*','!~/*','!*']
