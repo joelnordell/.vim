@@ -8,22 +8,62 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'RyanMillerC/better-vim-tmux-resizer'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'Shougo/context_filetype.vim'
 Plug 'tyru/caw.vim'
 Plug 'posva/vim-vue'
 Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
+Plug 'dense-analysis/ale'
+Plug 'cespare/vim-toml'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 call plug#end()
 
 " Incremental search
 set incsearch
 " Use Tab/Shift-Tab to move between matches
-cmap <Tab> <C-g>
-cmap <S-Tab> <C-t>
+" cmap <Tab> <C-g>
+" cmap <S-Tab> <C-t>
+
+" Resize panes like TMUX with Ctrl-Arrows (instead of Shift-Arrows)
+" noremap <C-Up> :resize +1<CR>
+" noremap <C-Down> :resize -1<CR>
+" noremap <C-Left> :vertical:resize +1<CR>
+" noremap <C-Right> :vertical:resize -1<CR>
+let g:tmux_resizer_resize_count = 1
+let g:tmux_resizer_vertical_resize_count = 1
+nnoremap <silent> <C-D> :TmuxResizeDown<CR>
+nnoremap <silent> <C-E> :TmuxResizeUp<CR>
+nnoremap <silent> <C-G> :TmuxResizeLeft<CR>
+nnoremap <silent> <C-H> :TmuxResizeRight<CR>
+
+" easier to remember paragraph wrapping
+function! WrapParagraph()
+  exe "gqip"
+endfunction
+
+" open preview window on right hand side
+augroup previewWindowPosition
+  au!
+  autocmd BufWinEnter * call PreviewWindowPosition()
+augroup END
+function! PreviewWindowPosition()
+  if &previewwindow
+    wincmd L
+    vertical resize 65
+    set wm=2
+    set wrap linebreak
+    set nonu
+    set cc=
+    set foldcolumn=1
+  endif
+endfunction
 
 " map turning off highlighting after search and closing quickfix window
-nnoremap <Esc><Esc> :noh<CR>:ccl<CR>
+nnoremap <Esc>/ :noh<CR>:ccl<CR>
 
 " YouCompleteMe configuration
 let g:ycm_clangd_binary_path = "/opt/clang/bin/clangd"
@@ -157,7 +197,8 @@ let g:jsx_ext_required = 0
 "set nofoldenable
 
 " Ctrl-] navigates using YCM
-nnoremap <C-]> :YcmCompleter GoToImprecise<cr>
+" nnoremap <C-]> :YcmCompleter GoToImprecise<cr>
+nnoremap <C-]> :YcmCompleter GoToDefinition<cr>
 
 ""
 " C++ IDE configuration
@@ -168,8 +209,9 @@ nnoremap <C-]> :YcmCompleter GoToImprecise<cr>
   "set secure exrc
 "endif
 
-" Map Ctrl-K to file quick-open using FZF
-nnoremap <C-k> :FZF<CR>
+" Map Ctrl-K to file quick-open using GFiles (unlike FZF it accounts for .gitignore)
+nnoremap <C-k> :GFiles<CR>
+" nnoremap <C-k> :FZF<CR>
 command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,
       \                 <bang>0 ? fzf#vim#with_preview('up:60%')
