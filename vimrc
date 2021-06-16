@@ -20,6 +20,7 @@ Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
+Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " Incremental search
