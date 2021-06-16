@@ -69,6 +69,7 @@ nnoremap <Esc>/ :noh<CR>:ccl<CR>
 " YouCompleteMe configuration
 let g:ycm_clangd_binary_path = "/opt/clang/bin/clangd"
 let g:ycm_extra_conf_globlist = ['~/Projects/ErisExchangePricingEngine/*','!~/*','!*']
+let g:ycm_always_populate_location_list = 1
 
 if ! has("gui_running")
   set t_Co=256
