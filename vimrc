@@ -87,9 +87,15 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 "vnoremap <C-X> x
 "vnoremap <C-C> y
 "nnoremap <C-V> gP
-vnoremap <silent> <C-X> :!xclip -f -sel clip<CR>gvx
-vnoremap <silent> <C-C> :!xclip -f -sel clip<CR>u
-nnoremap <silent> <C-V> :-1r !xclip -o -sel clip<CR>
+if has('macunix')
+  vnoremap <silent> <C-X> :!pbcopy<CR>gvx
+  vnoremap <silent> <C-C> :!pbcopy<CR>u
+  nnoremap <silent> <C-V> :-1r !pbpaste<CR>
+elseif has('unix')
+  vnoremap <silent> <C-X> :!xclip -f -sel clip<CR>gvx
+  vnoremap <silent> <C-C> :!xclip -f -sel clip<CR>u
+  nnoremap <silent> <C-V> :-1r !xclip -o -sel clip<CR>
+endif
 
 "cmap <C-V>  <C-R>+
 
