@@ -2,6 +2,9 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-dotenv'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'arcticicestudio/nord-vim'
@@ -21,7 +24,42 @@ Plug 'cespare/vim-toml'
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 Plug 'tpope/vim-unimpaired'
+Plug 'hashivim/vim-terraform'
+Plug 'lifepillar/pgsql.vim'
+Plug 'ledger/vim-ledger'
+if has('mac')
+  Plug 'rizzatti/dash.vim'
+endif
 call plug#end()
+
+" Faster help popups
+set updatetime=1000
+
+" Easier calling for :ALEFix prettier
+command PrettierFix :ALEFix prettier
+
+" Set ansible.yaml for known Ansible files
+au BufRead,BufNewFile site.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */ansible/*.yml set filetype=yaml.ansible
+
+" If others did not put newline at EOF, honor that decision.
+set nofixendofline
+
+" Prefer to treat .sql files as postgresql
+let g:sql_type_default = 'pgsql'
+
+" Set preferred behavior of backspace key
+set backspace=indent,eol,start
+
+" LSP for Terraform
+let g:ycm_language_server = 
+  \ [ 
+  \   {
+  \     'name': 'terraform',
+  \     'cmdline': [ 'terraform-lsp' ],
+  \     'filetypes': [ 'terraform' ]
+  \   },
+  \ ]
 
 " Incremental search
 set incsearch
@@ -47,29 +85,33 @@ function! WrapParagraph()
 endfunction
 
 " open preview window on right hand side
-augroup previewWindowPosition
-  au!
-  autocmd BufWinEnter * call PreviewWindowPosition()
-augroup END
-function! PreviewWindowPosition()
-  if &previewwindow
-    wincmd L
-    vertical resize 65
-    set wm=2
-    set wrap linebreak
-    set nonu
-    set cc=
-    set foldcolumn=1
-  endif
-endfunction
+" augroup previewWindowPosition
+"   au!
+"   autocmd BufWinEnter * call PreviewWindowPosition()
+" augroup END
+" function! PreviewWindowPosition()
+"   if &previewwindow
+"     wincmd L
+"     vertical resize 65
+"     set wm=2
+"     set wrap linebreak
+"     set nonu
+"     set cc=
+"     set foldcolumn=1
+"   endif
+" endfunction
 
 " map turning off highlighting after search and closing quickfix window
 nnoremap <Esc>/ :noh<CR>:ccl<CR>
 
 " YouCompleteMe configuration
 let g:ycm_clangd_binary_path = "/opt/clang/bin/clangd"
-let g:ycm_extra_conf_globlist = ['~/Projects/ErisExchangePricingEngine/*','!~/*','!*']
+let g:ycm_extra_conf_globlist = ['~/.ycm_extra_conf.py']
 let g:ycm_always_populate_location_list = 1
+let g:ycm_add_preview_to_completeopt = 0
+
+" Show completion detail in popup instead of preview (default was preview,menuone)
+set completeopt=popup,menuone
 
 if ! has("gui_running")
   set t_Co=256
@@ -96,6 +138,9 @@ elseif has('unix')
   vnoremap <silent> <C-C> :!xclip -f -sel clip<CR>u
   nnoremap <silent> <C-V> :-1r !xclip -o -sel clip<CR>
 endif
+
+" Set vertical bar character to unicode box drawing char instead of pipe
+set fillchars+=vert:│
 
 "cmap <C-V>  <C-R>+
 
@@ -190,7 +235,11 @@ let b:col='\%([^,]*,\|$\)'
 " Make tabs visible
 set list
 set listchars=tab:\→\ 
-highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
+" highlight SpecialKey guibg=DarkMagenta ctermbg=DarkMagenta
+au filetype * highlight Tabs guifg=#3B4252 term=bold ctermfg=236
+au filetype * match Tabs /\t/
+
+" highlight trailing whitespace
 
 " allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
@@ -218,7 +267,15 @@ nnoremap <C-]> :YcmCompleter GoToDefinition<cr>
 "endif
 
 " Map Ctrl-K to file quick-open using GFiles (unlike FZF it accounts for .gitignore)
-nnoremap <C-k> :GFiles<CR>
+function! GFilesOrFZF()
+  if isdirectory(".git")
+    :GFiles!
+  else
+    :FZF
+  endif
+endfunction
+nnoremap <C-k> :call GFilesOrFZF()<CR>
+
 " nnoremap <C-k> :FZF<CR>
 command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,
@@ -257,5 +314,11 @@ noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
 hi! link ExtraWhitespace DiffRemoved
 match ExtraWhitespace /\s\+$/
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
-autocmd ColorScheme * hi! link ExtraWhitespace DiffRemoved
+autocmd filetype * highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
+autocmd filetype * hi! link ExtraWhitespace DiffRemoved
+
+" Set fonts for MacVim
+if has('mac') && has('gui_running')
+  set macligatures
+  set guifont=FiraCode-Retina:h12
+endif
